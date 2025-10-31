@@ -12,11 +12,6 @@ if(isset($_GET['valider']) && isset($_GET['csrf'])) {
 
         if($membre) {
             updateMembre($_GET['valider'], ['statut' => 'VALIDE', 'date_statut' => date('Y-m-d')]);
-
-            // Envoyer un email de validation
-            // $emailContent = getEmailTemplateValidation($membre['prenom'], $membre['nom']);
-            // sendEmail($membre['mail'], 'Votre compte KASTA CROSSFIT a été validé', $emailContent);
-
             flash("Compte validé pour {$membre['prenom']} {$membre['nom']}", "success");
         } else {
             flash("Membre introuvable", "danger");
@@ -44,10 +39,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['refuser_membre'])) {
                 'statut' => 'REFUS',
                 'date_statut' => date('Y-m-d')
             ]);
-
-            // Envoyer un email de refus avec le motif
-            // $emailContent = getEmailTemplateRefus($membre['prenom'], $membre['nom'], $motif);
-            // sendEmail($membre['mail'], 'Votre demande d\'inscription KASTA CROSSFIT', $emailContent);
 
             flash("Compte refusé pour {$membre['prenom']} {$membre['nom']}", "warning");
         } else {
