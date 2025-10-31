@@ -32,9 +32,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
                 $_SESSION['user_id'] = $membre['id_membre'];
                 $_SESSION['user_name'] = $membre['prenom'] . ' ' . $membre['nom'];
-                $_SESSION['is_admin'] = $membre['gestionnaire_o_n_'];
+                // Seul l'admin principal (id = 1) a le statut is_admin
+                $_SESSION['is_admin'] = ($membre['id_membre'] == 1);
 
-                redirect($membre['gestionnaire_o_n_'] ? 'admin.php' : 'membre.php');
+                // Rediriger vers admin.php si admin ou gestionnaire
+                redirect(($membre['id_membre'] == 1 || $membre['gestionnaire_o_n_']) ? 'admin.php' : 'membre.php');
             } else {
                 recordAttempt('login');
                 $error = "Votre compte n'est pas encore validé";
