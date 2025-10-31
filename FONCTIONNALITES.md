@@ -111,24 +111,22 @@
 - **Protection :** `requireAdmin()` ligne 4 (admin uniquement)
 
 ### Accepter une inscription
-- **Code :** ligne 8-26
+- **Code :** ligne 8-22
 - **Processus :**
   1. Clic sur bouton "Valider"
   2. Mise à jour statut → `VALIDE`
   3. Enregistrement de `date_statut`
-  4. **Envoi automatique d'un email au membre** avec template HTML
-- **Template email :** `getEmailTemplateValidation()` (functions.php ligne 1067-1109)
+  4. Message flash de confirmation
 
 ### Refuser une inscription
-- **Code :** ligne 28-58
-- **Modal pour motif :** ligne 169-203
+- **Code :** ligne 24-49
+- **Modal pour motif :** ligne 161-195
 - **Processus :**
   1. Clic sur bouton "Refuser"
   2. Affichage modal avec textarea obligatoire (min 10 caractères)
   3. Saisie du motif de refus
   4. Mise à jour statut → `REFUS`
-  5. **Envoi automatique d'un email au membre** avec le motif
-- **Template email :** `getEmailTemplateRefus()` (functions.php ligne 1118-1156)
+  5. Message flash de confirmation
 - **Sécurité motif :** Validation longueur minimale, échappement HTML
 
 ### Filtres
@@ -373,8 +371,6 @@ redirect(($membre['id_membre'] == 1 || $membre['gestionnaire_o_n_']) ? 'admin.ph
 - [x] Bouton "Devenir adhérent" sur dashboard
 - [x] Dashboard admin : accepter inscriptions
 - [x] Dashboard admin : refuser avec motif
-- [x] Envoi automatique email validation
-- [x] Envoi automatique email refus
 - [x] Attribuer statut gestionnaire
 - [x] Retirer statut gestionnaire
 - [x] Gestionnaire créer événements sportifs
